@@ -1,0 +1,8 @@
+JAVA
+JDBC
+Servlet/JSP
+Java
+iBATIS
+JAVA
+ORACLE
+Linux

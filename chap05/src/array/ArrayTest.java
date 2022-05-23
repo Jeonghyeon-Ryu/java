@@ -18,7 +18,7 @@ public class ArrayTest {
 			System.out.println(s);
 		}
 		System.out.println("---------------------3");
-		Iterator iter = Arrays.asList(arr).iterator();
+		Iterator<String> iter = Arrays.asList(arr).iterator();
 		while(iter.hasNext()) {
 			System.out.println(iter.next());
 		}

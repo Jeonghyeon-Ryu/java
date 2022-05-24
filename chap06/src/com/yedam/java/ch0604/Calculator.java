@@ -33,7 +33,9 @@ public class Calculator {
 			return;
 		} else {
 			for(int i=0; i<st.length(); i++) {
-				if(47<st.charAt(i)&&st.charAt(i)<57)
+				if(47<st.charAt(i)&&st.charAt(i)<57) {
+					
+				}
 				
 			}
 		}

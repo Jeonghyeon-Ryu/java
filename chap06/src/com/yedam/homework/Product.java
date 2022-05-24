@@ -14,7 +14,7 @@ public class Product {
 	}
 	// 전체 출력
 	public String getName() {
-		return name+" : "+price;
+		return name;
 	}
 	// 가격 출력
 	public int getPrice() {

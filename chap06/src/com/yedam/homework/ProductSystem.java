@@ -41,7 +41,6 @@ public class ProductSystem {
 				maxIndex = i;
 			}
 			sumExcludeMax += product[i].getPrice();	// 반복문 한번만 돌리려고 여기서 총합먼저 구함.
-			System.out.println(sumExcludeMax);
 		}
 		if(maxIndex==-1)
 			System.out.println("최고가격 계산 오류");
@@ -51,5 +50,30 @@ public class ProductSystem {
 		// 최고가격 제외 제품 총합.
 		sumExcludeMax = sumExcludeMax - product[maxIndex].getPrice();
 		System.out.println("최고가격 제외 제품가격 총합 : " + sumExcludeMax);
+	}
+	//	4-1. 최고가격을 가지고 있는 제품정보
+	public Product getMaxPriceInfo() {
+		Product maxInfo = product[0];
+		for(int i=1; i<=index; i++) {
+			if(maxInfo.getPrice()<product[i].getPrice())
+				maxInfo = product[i];
+		}
+		return maxInfo;
+	}
+	public int getTotalPrice() {
+		int sum = 0;
+		for(Product temp : product)
+			sum += temp.getPrice();
+		int result = sum-getMaxPriceInfo().getPrice();
+		
+		///////////////////////////
+		Product maxInfo = getMaxPriceInfo();
+		for(Product temp : product) {
+			if(temp.getPrice() == maxInfo.getPrice())
+				continue;
+			sum += temp.getPrice();
+		}
+		
+		return result;
 	}
 }

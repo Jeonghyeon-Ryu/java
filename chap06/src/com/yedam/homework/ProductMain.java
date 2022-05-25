@@ -3,7 +3,6 @@ package com.yedam.homework;
 import java.util.Scanner;
 
 public class ProductMain {
-
 	public static void main(String[] args) {
 		boolean run = true;		// While 반복문 종료 확인위한 변수
 		Scanner sc = new Scanner(System.in);	// 사용자로부터 번호 입력을 위한 변수
@@ -21,6 +20,7 @@ public class ProductMain {
 			case 2:
 				System.out.print("상품 및 가격 입력(상품 가격) > ");
 				s = sc.nextLine();	//	한줄로 입력받음  ( 예 : 사과 1000 )
+				// sc.nextInt 로 써도 상관없음, 만약 nextInt 쓰려면 위에 다른것도 다 nextInt 로 바꿔야함.
 				ps.putProduct(s.split(" ")[0], Integer.parseInt(s.split(" ")[1]));	// 공백으로 분리 ( 예 : 사과 / 1000 )
 				break;
 			case 3:
@@ -33,6 +33,8 @@ public class ProductMain {
 				run = false;
 				System.out.println("프로그램을 종료합니다.");
 				break;
+			default:
+				System.out.println("잘못 입력하였습니다.");	
 			}
 		}
 		sc.close();

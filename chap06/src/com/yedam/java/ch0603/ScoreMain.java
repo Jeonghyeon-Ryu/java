@@ -8,8 +8,8 @@ public class ScoreMain {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		boolean run = true;
 		Scanner sc = new Scanner(System.in);
-		ScoreProgram sp = new ScoreProgram();
-//		Students st = Students.getInstance();
+//		ScoreProgram sp = new ScoreProgram();
+		StudentsManagement st = StudentsManagement.getInstance();
 		
 		while(run) {
 			System.out.println("――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
@@ -20,8 +20,9 @@ public class ScoreMain {
 			switch(sc.nextInt()) {
 			case 1:		// 학생 등록
 				System.out.println();
-				System.out.print("학번을 입력하세요. > ");
-				if(sp.inputStudent(sc.nextInt())) {
+				System.out.print("이름을 입력하세요. > ");
+				Student student = st.inputStudent(String.valueOf(sc.nextInt()));
+				if(student.getNumber()>0) {
 					System.out.println("학생 등록이 완료되었습니다.");
 				} else {
 					System.out.println("등록실패 !! 이미 등록된 학번입니다.");

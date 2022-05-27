@@ -8,7 +8,7 @@ public class ScoreMain {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		boolean run = true;
 		Scanner sc = new Scanner(System.in);
-//		ScoreProgram sp = new ScoreProgram();
+		ScoreProgram sp = new ScoreProgram();
 		StudentsManagement st = StudentsManagement.getInstance();
 		
 		while(run) {

@@ -4,31 +4,53 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Server extends Observer implements Runnable {
-	private File userFile = new File("D:\\dev\\workspace\\chap07\\src\\com\\yedam\\java\\ch0701_GuessNumber\\UserData.txt");
-	private File blockUserFile = new File("D:\\dev\\workspace\\chap07\\src\\com\\yedam\\java\\ch0701_GuessNumber\\BlockUserData.txt");
-	private List<Observer> observers = new ArrayList<Observer>();
-	private List<User> users = new ArrayList<User>();
+	private File userFile = new File("C:\\Users\\admin\\git\\java\\chap07\\src\\com\\yedam\\java\\ch0701_GuessNumber\\UserData.txt");
+	private File blockUserFile = new File("C:\\Users\\admin\\git\\java\\chap07\\src\\com\\yedam\\java\\ch0701_GuessNumber\\BlockUserData.txt");
+	private List<User> users = new ArrayList<User>(); // 0번째 MAIN 유저
 	private List<User> blockUserList = new ArrayList<User>();
+	private List<User> liveUser = new ArrayList<User>();
+	private static Server server = new Server();
 	// *************** Constructor 영역 !!
-	public Server() throws IOException {
-		if(!userFile.exists()) {
-			userFile.createNewFile();
+	private Server() {
+		if(!userFile.exists()||!blockUserFile.exists()) {
+			if(!blockUserFile.exists())
+				try {
+					blockUserFile.createNewFile();
+					System.out.println("서버 : 파일 생성 완료");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			if(!userFile.exists())
+				try {
+					userFile.createNewFile();
+					System.out.println("서버 : 파일 생성 완료");
+					User mainUser = new User("MAIN","MAIN","MAIN");
+					createUser(mainUser);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		} else {
-			readDatabase();
+			try {
+				readDatabase();
+				System.out.println("서버 : 데이터 읽기 완료");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	// *************** Method 영역 !! 
+	public static Server getInstance() {
+		return server;
+	}
 	public void readDatabase() throws IOException {
 		String line;
 		FileInputStream fis = new FileInputStream(userFile);
@@ -45,19 +67,21 @@ public class Server extends Observer implements Runnable {
 			User tempUser = new User(temp[0],temp[1],temp[2],Integer.parseInt(temp[3]),Integer.parseInt(temp[4]),Integer.parseInt(temp[5]));
 			blockUserList.add(tempUser);
 		}
+		br.close();
+		fis.close();
 	}
 	
 	// 요청 메세지 받을 유저 등록(attach) / 삭제(detach)
-	public void attach(Observer observer) {
-		observers.add(observer);
+	public void attach(User user) {
+		liveUser.add(user);
 	}
-	public void detach(Observer observer) {
-		observers.remove(observer);
+	public void detach(User user) {
+		liveUser.remove(user);
 	}
 	// 전체 메세지 전송
-	public void notifyObservers(String msg) {
-		for(Observer o: observers)
-			o.receive(msg);
+	public void notifyObservers(Data data) {
+		for(Observer o: liveUser)
+			o.receive(data);
 	}
 	// 단일유저 메세지 전송
 	void postMsg(String msg) {
@@ -65,41 +89,58 @@ public class Server extends Observer implements Runnable {
 	}
 	// 요청 확인
 	public void run() {
-		for(Observer o : observers) {
-			if(o.msg == " ")
-				continue;
-			decrypt(o, o.msg);
+		while(true) {
+			for(User u : liveUser) {
+				if(u.msg == "")
+					continue;
+				decrypt(u, u.msg);
+				System.out.println("데이터 읽기 완료");
+				u.msg="";
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	// 요청 세부 확인
-	private String decrypt(Observer o, String msg) {
+	private void decrypt(User o, String msg) {
 		String[] splitMsg = msg.split("#");
+		System.out.println(splitMsg[0]+" "+splitMsg[1]+" "+splitMsg[2]+ " " + splitMsg[3]);
 		if(splitMsg[0] == "0") {			// Admin Message
 			if(splitMsg[1]=="1") {				// getUsers
-				return "유저 불러오기 완료";
+				
 			} else if(splitMsg[1]=="2") {		// getRank
-				return "랭킹 불러오기 완료";
+				
 			} else if(splitMsg[1]=="3") {		// blockUser
 				blockUser(users.get(Integer.parseInt(splitMsg[2])));
-				return "유저 차단 완료";
 			}
 		} else if(splitMsg[0] == "1") {		// User Message
 			if(splitMsg[1]=="0") {				// withdrawal User
 				removeUser(users.get(Integer.parseInt(splitMsg[2])));
-				return "탈퇴 완료";
 			} else if(splitMsg[1]=="1") {		// setPw
 				updatePw(users.get(Integer.parseInt(splitMsg[2])),splitMsg[3]);
-				return "비밀번호 변경 완료";
 			} else if(splitMsg[1]=="2") {		// setName
 				updateName(users.get(Integer.parseInt(splitMsg[2])),splitMsg[3]);
-				return "이름 변경 완료";
 			}
 		} else if(splitMsg[0] == "2") {		// Game System Message
 			if(splitMsg[1]=="1") {				// setRank
-				return "랭킹 등록 완료";
+			}
+		} else if(splitMsg[0] == "3") {		// 
+			System.out.println("0번 인식 완료");
+			if(splitMsg[1]=="1") {				// 로그인 시도
+				System.out.println("decrypt 시도");
+				int index = selectUser(splitMsg[2],splitMsg[3]);
+				if(index>=0) {
+					Data data = new Data(true,users.get(index));
+					o.data = data;
+				}
+				System.out.println("decyrpt 완료");
+				System.out.println(o.data.approval+ " " + o.data.user.getId());
 			}
 		}
-		return "잘못된 요청입니다.";
 	}
 	
 	
@@ -133,6 +174,16 @@ public class Server extends Observer implements Runnable {
 	public boolean createUser(User user) {
 		return users.add(user);
 	}
+	
+	public int selectUser(String id, String pw) {
+		for(int i=0; i<users.size(); i++) {
+			if(users.get(i).getId()==id)
+				if(users.get(i).getPw()==pw)
+					return i;
+		}
+		return -1;
+	}
+	
 	private boolean blockUser(User user) {
 		return blockUserList.add(user);
 	}
@@ -161,7 +212,7 @@ public class Server extends Observer implements Runnable {
 		return true;
 	}
 
-	private void shutdown() throws IOException {
+	public void shutdown() throws IOException {
 		FileOutputStream fos = new FileOutputStream(userFile);
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 		for(int i=0; i<users.size(); i++) {

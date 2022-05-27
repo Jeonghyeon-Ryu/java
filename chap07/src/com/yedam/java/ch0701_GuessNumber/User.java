@@ -1,6 +1,6 @@
 package com.yedam.java.ch0701_GuessNumber;
 
-public class User extends Observer implements Runnable {
+public class User extends Observer {
 	private String id;
 	private String pw;
 	private String name;
@@ -27,10 +27,7 @@ public class User extends Observer implements Runnable {
 	}
 	
 	//	메소드
-	public void run() {
-		// User 를 받아야될지 데이터(클래스) 를 하나 만들어서 그걸 받아야할지 ..
-		this.receive("????????????????????????????");
-	}
+	
 	//	정보 확인
 	public String getId() {
 		return this.id;

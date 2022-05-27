@@ -45,5 +45,6 @@ public class TestMain {
 				break;
 			}
 		}
+		sc.close();
 	}
 }

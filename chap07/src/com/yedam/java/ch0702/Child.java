@@ -2,7 +2,8 @@ package com.yedam.java.ch0702;
 
 public class Child extends Father {
 	@Override
-	void method() {
+	public void method() {
 		System.out.println("Child Method");
+		System.out.println(MAX);
 	}
 }

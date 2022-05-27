@@ -1,28 +1,36 @@
 package com.yedam.java.ch0701_GuessNumber;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameSystem extends Observer implements Runnable {
-	static Scanner sc = new Scanner(System.in);
-	static List<Integer> list = new ArrayList<Integer>();
-	static int num;
-	static int myNum;
-	static int upDown=0;
-	static int running=0;
+public class GameSystem extends Observer {
+	Scanner sc = new Scanner(System.in);
+	List<Integer> list = new ArrayList<Integer>();
+	User user;
+	int num;
+	int myNum;
+	int upDown=0;
+	int running=0;
+	
+	public GameSystem(User user) {
+		this.user = user;
+	}
 	
 	public void run() {
-		menuPrint();
-		int menuNo = menuSelect();
-		if(menuNo==1) {
-			login();
-		}else if (menuNo==2) {
-			signUp();
-		}else if (menuNo==3) {
-			exit();
+		while(true) {
+			menuPrint();
+			int menuNo = menuSelect();
+			if(menuNo==1) {
+				gameRun();
+			}else if (menuNo==2) {
+				//showRank();
+			}else if (menuNo==3) {
+				user.data=null;
+				break;
+				//exit();
+			}
 		}
 	}
 	

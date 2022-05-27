@@ -1,17 +1,14 @@
 package com.yedam.java.ch0701_GuessNumber;
 
 public class Observer {
-	protected String msg = " ";
-	protected void receive(String msg){
-		System.out.println(this.msg + "에서 메시지를 받음 : " + msg);
+	protected String msg = "";
+	protected Data data;
+	
+	protected void receive(Data data){
+		this.data = data;
     }
 	protected String post() {
 		return msg;
 	}
 }
 
-
-
-class Data {
-	
-}

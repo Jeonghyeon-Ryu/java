@@ -7,7 +7,7 @@ public class ChildTest {
 		Child child = new Child();
 		Cousin cousin = new Cousin();
 		
-		GranPa pa = new GranPa();
+		GranPa pa = new Father();
 		pa.method();
 		pa = father;
 		father.method();

@@ -15,5 +15,6 @@ public class CalculateMain {
 		Calculator cal = new Calculator();
 		
 		cal.process(st);
+		scanner.close();
 	}
 }

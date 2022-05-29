@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="calculator/src"/>
+	<classpathentry kind="src" path="chap05/src"/>
+	<classpathentry kind="src" path="chap06/src"/>
+	<classpathentry kind="src" path="chap06_example/src"/>
+	<classpathentry kind="src" path="chap07/src"/>
+	<classpathentry kind="src" path="chap08/src"/>
+	<classpathentry kind="src" path="test_RJH/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+	<classpathentry kind="src" path="text/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

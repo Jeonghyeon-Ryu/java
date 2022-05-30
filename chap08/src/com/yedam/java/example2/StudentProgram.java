@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class StudentProgram implements Program {
 	private Scanner sc = new Scanner(System.in);
-	
+
 	@Override
 	public void menuPrint() {
 		System.out.println("=========================================");

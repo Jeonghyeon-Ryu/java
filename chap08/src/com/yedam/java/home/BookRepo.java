@@ -2,13 +2,11 @@ package com.yedam.java.home;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class BookRepo implements BookAccess {
 	// 필드
 	private static BookRepo instance = new BookRepo();
 	private List<Book> bookList = new ArrayList<>();
-	
 	
 	// 생성자
 	private BookRepo() { }
@@ -24,6 +22,8 @@ public class BookRepo implements BookAccess {
 			System.out.println("도서 등록이 완료되었습니다.");
 		else
 			System.out.println("도서 등록이 실패하였습니다.");
+		
+		System.out.println();
 	}
 
 	@Override
@@ -75,6 +75,7 @@ public class BookRepo implements BookAccess {
 	public double selectAvg() {
 		return ((double)selectTotalPrice() - selectHighstPrice().getBookPrice() - selectLowerPrice().getBookPrice())/(bookList.size()-2);		
 	}
+	
 	// 가격 총합
 	public int selectTotalPrice() {
 		int totalPrice=0;

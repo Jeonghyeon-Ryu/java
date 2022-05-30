@@ -14,7 +14,7 @@ public class CalculateMain {
 		String st = scanner.nextLine();
 		Calculator cal = new Calculator();
 		
-		cal.process(st);
+		Calculator.process(st);
 		scanner.close();
 	}
 }

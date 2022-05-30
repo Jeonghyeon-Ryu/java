@@ -46,6 +46,7 @@ public class BookSystem implements BookProgram {
 		} else {
 			System.out.println("등록된 도서가 없습니니다.");
 		}
+		System.out.println();
 	}
 
 	@Override
@@ -57,6 +58,7 @@ public class BookSystem implements BookProgram {
 		} else {
 			System.out.println("입력하신 번호에 해당하는 도서가 없습니다.");
 		}
+		System.out.println();
 			
 	}
 

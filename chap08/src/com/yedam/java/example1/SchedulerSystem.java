@@ -46,6 +46,7 @@ public class SchedulerSystem {
 			}
 			
 			System.out.println();
+			sc.close();
 			
 		}
 	}

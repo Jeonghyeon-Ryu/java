@@ -6,14 +6,14 @@ public class Calculator {
 	static int leftValue;
 	static int rightValue;
 	static boolean countOperator;
-	static Stack stack;
+	static Stack<Character> stack;
 	static char oper;
 	
 	Calculator() {
 		leftValue = 0;
 		rightValue = 0;
 		countOperator = false;
-		stack = new Stack();
+		stack = new Stack<>();
 		oper = ' ';
 	}
 	void numberProcess(String st) {
@@ -24,8 +24,8 @@ public class Calculator {
 		}
 	}
 	void stackProcess(String st) throws InterruptedException {
-		boolean bracketFlag = false;
-		boolean mulOperFlag = false;
+//		boolean bracketFlag = false;
+//		boolean mulOperFlag = false;
 		
 		if(st.toLowerCase().equals("exit")) {
 			System.out.println("정상 종료 되었습니다.");

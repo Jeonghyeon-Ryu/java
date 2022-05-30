@@ -35,7 +35,7 @@ public class MainApp {
 		st1.forEach(s->System.out.print(s));
 		System.out.println("");
 		
-		Stream st2 = Arrays.asList(scores).stream(); 
+		Stream<int[]> st2 = Arrays.asList(scores).stream(); 
 		st2.forEach(s->System.out.print(s));
 		scan.close();
 	}

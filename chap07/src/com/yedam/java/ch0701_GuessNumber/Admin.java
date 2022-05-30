@@ -1,9 +1,6 @@
 package com.yedam.java.ch0701_GuessNumber;
 
-import java.util.List;
-
 public class Admin extends Observer {
-	private List<User> Users; 
 	private static String id = "admin";
 	
 	// 유저 # 요청식별자 # 아이디 # 변경사항 # 

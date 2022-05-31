@@ -32,7 +32,7 @@ public class BookSystem implements BookProgram {
 	}
 	@Override
 	public void inputBook(BookAccess bookAccess) {
-		bookAccess.createBook(inputBookInfo());
+		bookAccess.insertBook(inputBookInfo());
 	}
 
 	@Override
@@ -49,9 +49,13 @@ public class BookSystem implements BookProgram {
 		System.out.println();
 	}
 
+	// ******************** 교수님은 if문을 Book Class 에 넣었음.
+	// ( showInfo 메소드로 getIsbn getBookName, getBookPrice 를 한번에 String으로 정리해서 불러옴 )
 	@Override
 	public void printBook(BookAccess bookAccess) {
+		// ISBN 입력 > DAO에서 Select
 		Book book = bookAccess.selectBook(inputIsbn());
+		// Select 된것 출력
 		if(book!=null) {
 			System.out.printf("ISBN\t\t도서이름\t\t가격\t\t\n");
 			System.out.printf("%d\t\t%s\t\t%d\t\t\n",book.getIsbn(), book.getBookName(), book.getBookPrice());

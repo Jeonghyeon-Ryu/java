@@ -3,6 +3,8 @@ package com.yedam.java.home;
 import java.util.ArrayList;
 import java.util.List;
 
+// DAO 데이터베이스의 접근 담당하는 클래스 ( DB에 CRUD 전담 -> 조회 및 조작 ) / 주로 싱글톤으로 작성하는게 보편적
+// JSP 와 Servlet 은 따로 구현.
 public class BookRepo implements BookAccess {
 	// 필드
 	private static BookRepo instance = new BookRepo();
@@ -17,7 +19,7 @@ public class BookRepo implements BookAccess {
 	}
 
 	@Override
-	public void createBook(Book book) {
+	public void insertBook(Book book) {
 		if(bookList.add(book))
 			System.out.println("도서 등록이 완료되었습니다.");
 		else
@@ -34,14 +36,16 @@ public class BookRepo implements BookAccess {
 
 	@Override
 	public Book selectBook(int isbn) {
+		Book book=null;
 		for(int i=0; i<bookList.size(); i++) {
 			if(bookList.get(i).getIsbn()==isbn)
-				return bookList.get(i);
+				book=bookList.get(i);
 		}
-		return null;
+		return book;
 	}
 
 	@Override
+	// Report 출력 메소드
 	public void selectRepotBooks() {
 		Book highstPriceBook = selectHighstPrice();
 		Book LowerPriceBook = selectLowerPrice();

@@ -1,5 +1,6 @@
 package com.yedam.java.home;
 
+// DTO 또는 VO 클래스 -> 데이터베이스 요소에 맞게 필드가 구성되며, Getter Setter 로 이루어짐.
 public class Book {
 	private static int SerialISBN = 1000;
 	private int isbn;

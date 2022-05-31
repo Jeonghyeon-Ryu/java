@@ -1,7 +1,7 @@
 package com.yedam.java.home;
 
 public interface BookAccess {
-	public void createBook(Book book);
+	public void insertBook(Book book);
 	public Book[] selectBooks();
 	public Book selectBook(int isbn);
 	public void selectRepotBooks();

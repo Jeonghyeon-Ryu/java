@@ -79,7 +79,6 @@ public class ScoreProgram {
 		
 		MAX = Collections.max(scores.entrySet(),Map.Entry.comparingByValue());
 		MIN = Collections.min(scores.entrySet(),Map.Entry.comparingByValue());
-		//MAX.getKey();
 		Iterator<Integer> iter = scores.values().iterator();
 		while(iter.hasNext())
 			sum+=(int)iter.next();

@@ -3,50 +3,132 @@ package crawling;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 
 public class CrawlingTest {
 	// 필드
 	public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-	public static final String WEB_DRIVER_PATH = "C:\\server\\libs\\chromedriver.exe";
+	public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\java\\text\\src\\chromedriver.exe";
 	public static WebDriver driver;
 	// 메인
 	public static void main(String[] args) throws InterruptedException {
 		// 웹 드라이버가 설치된 경로에서 드라이버.exe 파일 실행
 		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 		
-		driver = new ChromeDriver();
-		String url = "https://map.naver.com/v5/search/%EB%A7%9B%EC%A7%91?c=14295028.7020736,4315225.3636339,15,0,0,0,dh";
+//		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("start-maximized");
+		options.addArguments("--headless");
+		driver = new ChromeDriver(options);
 		
+//		options.addArguments("--headless");
+//		options.addArguments("start-maximized");
+//		driver = new ChromeDriver(options);
+		
+		
+		// ******************************* 지도 좌표 Open
+		String url = "https://map.naver.com/v5/search/맛집?c=14081417.7645863,3962665.9138556,17,0,0,0,dh";
 		driver.get(url);
 		
-		driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"searchIframe\"]")));
-		List<WebElement> we = driver.findElements(By.className("OXiLu"));
-		Thread.sleep(2000);
-		we.get(0).click();
+		// 가게 리스트 스크롤
+		driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"searchIframe\"]")));	// 가게 리스트 iframe 커서 이동
+		WebElement scroll = driver.findElement(By.className("_1Az1K"));	// 가게 리스트 요소
+		WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(scroll);
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
 		
-		List<WebElement> iframe = driver.findElements(By.id("entryIframe"));
-		System.out.println("iframe 갯수 : " + iframe.size());
-		
-		driver.switchTo().frame(driver.findElement(By.id("entryIframe")));
-		List<WebElement> listName = driver.findElements(By.className("_3XamX"));
-		List<WebElement> listDiv = driver.findElements(By.className("_3ocDE"));
-		Thread.sleep(2000);
-		driver.findElement(By.partialLinkText("메뉴")).click();
-				
-		System.out.println(we.size()); 	
-		for(WebElement e : we) {
-			System.out.println(e.getAttribute("innerText"));
+		// ******************************* 페이지 가게 정보 GET
+		String preWebElement=null;
+		List<WebElement> we = null;
+		while(true) {
+			we = driver.findElements(By.className("OXiLu"));
+			
+			if(we.size()==0) {
+				break;
+			}
+			if(we.get(0).getAttribute("innerText").equals(preWebElement)) {
+				break;
+			}
+			// 세부 가게정보 Get 들어갈곳
+			for(WebElement s : we) {
+				try {
+					s.click();
+				} catch(ElementClickInterceptedException e) {
+					System.out.println("클릭오류 발생");
+				}
+				driver.switchTo().defaultContent();
+				Thread.sleep(2000);
+				driver.switchTo().frame(driver.findElement(By.xpath("/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/app-base/search-layout/div[2]/entry-layout/entry-place-bridge/div/nm-external-frame-bridge/nm-iframe/iframe")));
+						
+				WebElement storeName = driver.findElement(By.xpath("//*[@id=\"_title\"]/span[1]"));
+				System.out.println("가게 이름 : " + storeName.getAttribute("innerText"));
+				driver.switchTo().defaultContent();
+				driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"searchIframe\"]")));
+			}
+			
+			preWebElement = we.get(0).getAttribute("innerText");
+			driver.findElements(By.className("_2bgjK")).get(1).click();
+			Thread.sleep(2000);
+			we.clear();
 		}
-//		
-//		for(WebElement e : listName) {
-//			System.out.println(e.getAttribute("innerText"));
+		
+		
+		
+		
+		
+		
+		
+		
+
+		// ******************************* 세부 가게 정보 GET
+//		for(WebElement s : we) {
+//			s.click();
+//			driver.switchTo().defaultContent();
+//			Thread.sleep(2000);
+//			driver.switchTo().frame(driver.findElement(By.xpath("/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/app-base/search-layout/div[2]/entry-layout/entry-place-bridge/div/nm-external-frame-bridge/nm-iframe/iframe")));
+//					
+//			WebElement storeName = driver.findElement(By.xpath("//*[@id=\"_title\"]/span[1]"));
+//			System.out.println("가게 이름 : " + storeName.getAttribute("innerText"));
+//			driver.switchTo().defaultContent();
+//			driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"searchIframe\"]")));
+//			
+//			WebElement storeDiv = driver.findElement(By.className("_3ocDE"));
+//			System.out.println("가게 분류 : " + storeDiv.getAttribute("innerText"));
+//			
+//			WebElement storeAddress = driver.findElement(By.className("_2yqUQ"));
+//			System.out.println("가게 주소 : " + storeAddress.getAttribute("innerText"));
+//			
+//			WebElement storePhone = driver.findElement(By.className("_3ZA0S"));
+//			System.out.println("가게 전화번호 : " + storePhone.getAttribute("innerText"));
+//			
+//			List<WebElement> temp = driver.findElements(By.className("_2RG_o"));
+//			for(WebElement e : temp) {
+//				if(e.getAttribute("innerText").equals("메뉴")) {
+//					e.click();
+//					break;
+//				}
+//			}
+//			
+//			List<WebElement> listMenu = driver.findElements(By.className("_3yfZ1"));
+//					
+//			for(WebElement e : listMenu) {
+//				System.out.println("메뉴 : " + e.getAttribute("innerText"));
+//			}
 //		}
-//		for(WebElement e : listDiv) {
-//			System.out.println(e.getAttribute("innerText"));
-//		}
+		// ********************************************************************************
+		
+		
+		
 	}
 
 }

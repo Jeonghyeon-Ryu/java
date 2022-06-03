@@ -13,8 +13,33 @@ public class Human {
 	}
 	
 	// 메소드
+	
 	public void getInformation() {
 		System.out.println(name + "님의 신장 "+ height + ", 몸무게 " + weight + " 입니다");
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 }

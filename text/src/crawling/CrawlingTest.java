@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,7 +15,7 @@ import org.openqa.selenium.interactions.WheelInput;
 public class CrawlingTest {
 	// 필드
 	private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-	private static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\java\\text\\src\\chromedriver.exe";
+	private static final String WEB_DRIVER_PATH = "C:\\server\\git\\java\\text\\src\\chromedriver.exe";
 	private static WebDriver driver;
 	private static List<String> searchUrlList = new ArrayList<>();
 	// 메인

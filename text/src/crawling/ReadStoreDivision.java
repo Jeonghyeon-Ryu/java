@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReadStoreDivision {
 	// 필드
-	private File file = new File("C:\\Users\\admin\\git\\java\\text\\src\\crawling\\StoreList.txt");
+	private File file = new File("C:\\server\\git\\java\\text\\src\\crawling\\StoreList.txt");
 	private List<String> storeDivisionList = new ArrayList<>();
 	// 생성자
 	public ReadStoreDivision() {

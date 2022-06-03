@@ -12,7 +12,7 @@ import java.util.Set;
 public class ReadSector {
 	// 필드 
 	Set<String> sectorList = new HashSet<>();
-	private File file = new File("C:\\Users\\admin\\git\\java\\text\\src\\crawling\\SectorList.txt");
+	private File file = new File("C:\\server\\git\\java\\text\\src\\crawling\\SectorList.txt");
 	// 생성자 ( 모든 Sector 읽기 )
 	public ReadSector() {
 		String line;

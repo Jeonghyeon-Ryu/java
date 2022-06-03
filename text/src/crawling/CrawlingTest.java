@@ -14,48 +14,50 @@ import org.openqa.selenium.interactions.WheelInput;
 public class CrawlingTest {
 	// 필드
 	public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-	public static final String WEB_DRIVER_PATH = "C:\\server\\git\\java\\text\\src\\chromedriver.exe";
+	public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\java\\text\\src\\chromedriver.exe";
 	public static WebDriver driver;
 	// 메인
 	public static void main(String[] args) throws InterruptedException, AWTException {
+		// 지역 리스트 읽기
+		ReadSector rs = new ReadSector();
+		ReadStoreDivision rsd = new ReadStoreDivision();
+		rsd.printStoreDivision();
+		List<String> searchList = 
+		
 		// 웹 드라이버가 설치된 경로에서 드라이버.exe 파일 실행
-		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
-		
-//		driver = new ChromeDriver();
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("start-maximized");
-//		options.addArguments("--headless");
-		driver = new ChromeDriver(options);
-		
-//		options.addArguments("--headless");
+//		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+//		
+//		ChromeOptions options = new ChromeOptions();
 //		options.addArguments("start-maximized");
-//		driver = new ChromeDriver(options);
-		
-		
+//		options.addArguments("--headless");
+//		driver = new ChromeDriver(options);
+//		
+//		
+//		
 		// ******************************* 지도 좌표 Open
-		String url = "https://map.naver.com/v5/search/맛집?c=14081417.7645863,3962665.9138556,17,0,0,0,dh";
-		driver.get(url);
-		
-		// 가게 리스트 스크롤
-		driver.switchTo().frame(driver.findElement(By.id("searchIframe")));	// 가게 리스트 iframe 커서 이동
-		WebElement scroll = driver.findElement(By.className("_1Az1K"));	// 가게 리스트 요소
-		WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(scroll);
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
-		
-		driver.switchTo().defaultContent();
-		WebElement mainElement = driver.findElement(By.xpath("//*[@id=\"baseMap\"]/div[1]/div"));
-		mainElement.click();
-		Thread.sleep(2000);
-		Robot robot = new Robot();
-		
-		robot.keyPress(39);
-		Thread.sleep(800);
-		robot.keyRelease(39);
+//		String url = "https://map.naver.com/v5/search/맛집?c=14081417.7645863,3962665.9138556,17,0,0,0,dh";
+//		driver.get(url);
+//		
+//		// 가게 리스트 스크롤
+//		driver.switchTo().frame(driver.findElement(By.id("searchIframe")));	// 가게 리스트 iframe 커서 이동
+//		WebElement scroll = driver.findElement(By.className("_1Az1K"));	// 가게 리스트 요소
+//		WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(scroll);
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		new Actions(driver).scrollFromOrigin(scrollOrigin, 0, 3000).perform();
+//		
+//		driver.switchTo().defaultContent();
+//		WebElement mainElement = driver.findElement(By.xpath("//*[@id=\"baseMap\"]/div[1]/div"));
+//		mainElement.click();
+//		Thread.sleep(2000);
+//		Robot robot = new Robot();
+//		
+//		robot.keyPress(39);
+//		Thread.sleep(800);
+//		robot.keyRelease(39);
 		
 		// ******************************* 페이지 가게 정보 GET
 //		String preWebElement=null;

@@ -5,6 +5,7 @@ public class ObesityInfo extends StandardWeightInfo {
 	public ObesityInfo(String name, int height, int weight) {
 		super(name, height, weight);
 	}
+	
 
 	@Override
 	public void getInformation() {

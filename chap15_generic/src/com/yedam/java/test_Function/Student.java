@@ -10,11 +10,9 @@ public class Student {
         this.mathScore = mathScore;
         this.englishScore = englishScore;
     }
-
     public String getName() {
         return name;
     }
-
     public int getMathScore() {
         return mathScore;
     }

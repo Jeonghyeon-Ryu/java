@@ -34,6 +34,7 @@ public class ScoreProgram {
 				scores.put(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]));
 			}
 			br.close();
+			
 		}
 	}
 	// 1. 학생 등록
@@ -42,6 +43,7 @@ public class ScoreProgram {
 			return false;
 		}else {
 			scores.put(numStudent, 0);
+			
 			return true;
 		}
 	}
@@ -76,7 +78,6 @@ public class ScoreProgram {
 		Entry<Integer, Integer> MIN;
 		double AVG, AVG2;
 		int sum=0;
-		
 		MAX = Collections.max(scores.entrySet(),Map.Entry.comparingByValue());
 		MIN = Collections.min(scores.entrySet(),Map.Entry.comparingByValue());
 		Iterator<Integer> iter = scores.values().iterator();

@@ -37,5 +37,6 @@ public class StringTest {
 		
 		System.out.println("Size : " + set.size());
 		set.forEach(x -> System.out.println("\t Element : " + x));
+		br.close();
 	}
 }

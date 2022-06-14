@@ -35,7 +35,7 @@ public class MainTest {
 	}
 	// 거의 Throws 하는 경우가 많다. 불러주는 쪽에서 에러 처리방식을 결정하는 경우기 많기때문.
 	public static void findClass() throws ClassNotFoundException, ArrayIndexOutOfBoundsException {
-		Class c = Class.forName("java.lang.String");
+		Class<?> c = Class.forName("java.lang.String");
 		String[] s = new String[3];
 		String a = s[5];
 		System.out.println(a);

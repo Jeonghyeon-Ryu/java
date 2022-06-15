@@ -1,6 +1,7 @@
 package com.yedam.java.homework;
 
 public class RPGgame implements Keypad{
+	@SuppressWarnings("unused")
 	private int mode;
 	public RPGgame() {
 		mode = NORMAL_MODE;

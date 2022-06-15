@@ -144,6 +144,7 @@ public class Server extends Observer implements Runnable {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private String getRank() {
 		sortScore();
 		String result = "";
@@ -154,6 +155,7 @@ public class Server extends Observer implements Runnable {
 		}
 		return result;
 	}
+	@SuppressWarnings("unused")
 	private void sortScore() {
 		User temp;
 		for(int i=users.size()-1; i>0; i--) {

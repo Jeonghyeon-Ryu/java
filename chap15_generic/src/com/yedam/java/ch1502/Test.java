@@ -1,6 +1,7 @@
 package com.yedam.java.ch1502;
 
 public class Test {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		testInterface a = new testInterface() {
 			public int getInt(int x) {

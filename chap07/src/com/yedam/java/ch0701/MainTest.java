@@ -2,6 +2,7 @@ package com.yedam.java.ch0701;
 
 public class MainTest {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Phone phone = new Phone("폴더폰", "빨강");
 		DmbPhone dmbPhone = new DmbPhone("슬라이드폰", "파랑");

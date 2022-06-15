@@ -11,6 +11,7 @@ public class Calculator {
 	Stack<Integer> intStack = new Stack<>();
 	
 	// 생성자
+	@SuppressWarnings("static-access")
 	Calculator(String sc){
 		this.strInit = sc;
 		this.bracketCount = 0;

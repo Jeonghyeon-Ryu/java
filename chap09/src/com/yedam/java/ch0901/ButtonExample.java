@@ -1,7 +1,5 @@
 package com.yedam.java.ch0901;
 
-import com.yedam.java.ch0901.Button.OnClickListener;
-
 public class ButtonExample {
 
 	public static void main(String[] args) {

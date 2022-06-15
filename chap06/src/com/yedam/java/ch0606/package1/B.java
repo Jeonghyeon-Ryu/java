@@ -18,6 +18,7 @@ public class B extends A{
 //		a.method3();
 	}
 	
+	@SuppressWarnings("unused")
 	private void method1(int a) {
 		a = 10;
 	}

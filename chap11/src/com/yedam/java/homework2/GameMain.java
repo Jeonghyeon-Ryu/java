@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class GameMain {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		boolean run = true;
 		Scanner sc = new Scanner(System.in);

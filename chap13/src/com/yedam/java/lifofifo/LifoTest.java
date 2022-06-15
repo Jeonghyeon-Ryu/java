@@ -1,8 +1,6 @@
 package com.yedam.java.lifofifo;
 
-import java.util.Set;
 import java.util.Stack;
-import java.util.TreeSet;
 
 public class LifoTest {
 

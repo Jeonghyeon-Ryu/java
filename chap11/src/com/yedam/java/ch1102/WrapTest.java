@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class WrapTest {
 
+	@SuppressWarnings({ "unused", "deprecation" })
 	public static void main(String[] args) {
 		
 		// boxing

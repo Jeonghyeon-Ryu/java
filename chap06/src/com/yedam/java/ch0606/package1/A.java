@@ -14,6 +14,7 @@ public class A {
 	
 	public int field1;
 	protected int field2;
+	@SuppressWarnings("unused")
 	private int field3;
 	int field4;
 	

@@ -10,6 +10,7 @@ class B{
 		this.a = a;
 	}
 	
+	@SuppressWarnings("unused")
 	void method() {
 		A a;
 	}

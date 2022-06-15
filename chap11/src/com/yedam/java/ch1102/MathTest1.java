@@ -2,6 +2,7 @@ package com.yedam.java.ch1102;
 
 public class MathTest1 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		int v1 = Math.abs(-5);
 		double v2 = Math.abs(-3.14);

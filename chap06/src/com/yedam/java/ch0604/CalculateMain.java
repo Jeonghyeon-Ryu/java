@@ -7,6 +7,7 @@ public class CalculateMain {
 	public static void main(String[] args) {
 		init();
 	}
+	@SuppressWarnings("unused")
 	public static void init() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("-------- 계산기 --------");

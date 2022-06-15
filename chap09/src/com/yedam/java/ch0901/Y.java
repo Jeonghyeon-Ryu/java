@@ -49,6 +49,7 @@ public class Y {
 //		arg = 50;
 //		var = 100;
 		class D {
+			@SuppressWarnings("unused")
 			void method() {
 				int result = arg+var;
 			}

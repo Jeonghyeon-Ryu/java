@@ -1,6 +1,5 @@
 package com.yedam.java.list;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 

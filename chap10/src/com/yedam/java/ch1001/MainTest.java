@@ -2,6 +2,7 @@ package com.yedam.java.ch1001;
 
 public class MainTest {
 
+	@SuppressWarnings({ "unused", "null" })
 	public static void main(String[] args) {
 		// 실행예외 -> 문법적으로 문제가 없고 실제 실행 시 발생하는 예외
 		
@@ -45,6 +46,7 @@ public class MainTest {
 			System.out.println("에러 : " + e.toString());
 		}
 	}
+	@SuppressWarnings("unused")
 	public static void changeDog(Animal animal) {
 		if(animal instanceof Dog) {
 			Dog dog = (Dog) animal;

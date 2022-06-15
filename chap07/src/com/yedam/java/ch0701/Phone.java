@@ -28,6 +28,7 @@ public class Phone {
 	void call() {
 		System.out.println("통화를 합니다.");
 	}
+	@SuppressWarnings("unused")
 	private void print() {
 		System.out.println("private Test");
 	}

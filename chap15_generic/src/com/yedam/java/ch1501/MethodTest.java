@@ -2,6 +2,7 @@ package com.yedam.java.ch1501;
 
 public class MethodTest {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		BoxA<Integer> intBox = Util.<Integer>boxing(100);
 		

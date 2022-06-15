@@ -2,6 +2,7 @@ package com.yedam.java.ch0605;
 
 public class CarTest2 {
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		Car first = new Car("레이");
 		Car second = new Car("모닝");

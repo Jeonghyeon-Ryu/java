@@ -8,6 +8,7 @@ public class A {
 	void method() {
 		class D {
 			//	필드
+			@SuppressWarnings("unused")
 			int field1;
 			//	생성자
 			D() {

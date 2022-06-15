@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class PrintThreadTest {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		Thread jobThread = new PrintThread();
 		jobThread.start();

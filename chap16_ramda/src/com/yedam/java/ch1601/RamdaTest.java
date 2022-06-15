@@ -2,6 +2,7 @@ package com.yedam.java.ch1601;
 
 public class RamdaTest {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MyFunInterfaceA fia = () -> System.out.println("Functional Interface A");
 		MyFunInterfaceB fib = x -> System.out.println("Functional Interface B : " + x);

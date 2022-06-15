@@ -15,10 +15,11 @@ import org.openqa.selenium.interactions.WheelInput;
 public class CrawlingTest {
 	// 필드
 	private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-	private static final String WEB_DRIVER_PATH = "C:\\server\\git\\java\\text\\src\\chromedriver.exe";
+	private static final String WEB_DRIVER_PATH = CrawlingTest.class.getResource("chromedriver.exe").getPath();
 	private static WebDriver driver;
 	private static List<String> searchUrlList = new ArrayList<>();
 	// 메인
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException, AWTException {
 		// 지역 리스트 읽기
 		ReadSector rs = new ReadSector();

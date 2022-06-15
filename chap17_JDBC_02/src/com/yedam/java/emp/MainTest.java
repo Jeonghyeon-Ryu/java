@@ -11,6 +11,7 @@ public class MainTest {
 		System.out.println();
 		System.out.println(EmpDAO.getInstance().selectOne(149).toString());
 		System.out.println();
+		
 		EmpDAO.getInstance().insert(new Employee());
 		EmpDAO.getInstance().update(new Employee());
 		EmpDAO.getInstance().delete(1000);

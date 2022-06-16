@@ -16,7 +16,7 @@ public class DeptDAO {
 	private static DeptDAO deptDAO = null;
 	private DeptDAO() {}
 	public static DeptDAO getInstance() {
-		if(deptDAO != null) {
+		if(deptDAO == null) {
 			deptDAO = new DeptDAO();
 		}
 		return deptDAO;
@@ -70,17 +70,15 @@ public class DeptDAO {
 		}
 	}
 	
-	public boolean updateDB(Department dept) {
+	public boolean update(Department dept) {
 		String sql = "UPDATE departments SET" 
-				+ "location_id=?,manager_id=?,department_name=?"
+				+ "department_name=?"
 				+ "WHERE department_id=?";
 		try {
 			connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dept.getLocationId());
-			pstmt.setInt(2, dept.getManagerId());
-			pstmt.setString(3, dept.getDepartmentName());
-			pstmt.setInt(4, dept.getDepartmentId());
+			pstmt.setString(1, dept.getDepartmentName());
+			pstmt.setInt(2, dept.getDepartmentId());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,12 +89,12 @@ public class DeptDAO {
 		return true;
 	}
 
-	public boolean deleteDB(int gb_id) {
+	public boolean delete(int deptId) {
 		String sql = "DELETE FROM departments WHERE department_id=?";
 		try {
 			connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, gb_id);
+			pstmt.setInt(1, deptId);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,7 +105,7 @@ public class DeptDAO {
 		return true;
 	}
 	
-	public boolean insertDB(Department dept) {
+	public boolean insert(Department dept) {
 		String sql_seq = "SELECT MAX(department_id)+10 FROM departments";
 		String sql = "INSERT INTO departments VALUES(?,?,?,?)";
 		int seq = 0;

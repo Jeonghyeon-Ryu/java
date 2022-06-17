@@ -37,6 +37,7 @@ public class ProductDAO extends DAO {
 		try {
 			connect();
 			String sql = "UPDATE product SET product_price =? WHERE product_id= ?";
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, product.getProductPrice());
 			pstmt.setInt(2, product.getProductId());
 			result = pstmt.executeUpdate();					
@@ -64,12 +65,13 @@ public class ProductDAO extends DAO {
 	}
 	//단건조회 - 제품번호
 	public Product selectOne(String productName) {
-		Product product = null;
+		Product product = new Product();
 		try {
 			connect();
-			String sql = "SELECT * FROM product WHERE product_name = "+productName;
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM product WHERE product_name = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, productName);
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				product.setProductId(rs.getInt("product_id"));
 				product.setProductName(rs.getString("product_name"));
@@ -84,7 +86,7 @@ public class ProductDAO extends DAO {
 	}
 	//단건조회 - 제품이름
 	public Product selectOne(int productId) {
-		Product product = null;
+		Product product = new Product();
 		try {
 			connect();
 			String sql = "SELECT * FROM product WHERE product_id = " + productId;

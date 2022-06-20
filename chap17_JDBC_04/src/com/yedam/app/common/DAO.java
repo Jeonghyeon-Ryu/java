@@ -1,7 +1,6 @@
 package com.yedam.app.common;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,44 +17,47 @@ public class DAO {
 	
 	private String jdbc_driver;
 	private String oracle_url;
-	private String connectedId;
-	private String connectedPwd;
+	private String id;
+	private String pw;
+	
+	public DAO() {
+		dbConfig();
+	}
 	
 	private void dbConfig() {
 		String resource = "config/db.properties";
 		Properties properties = new Properties();
 		
-		try {				// 현재 클래스의 위치
+		try {
 			String filePath = ClassLoader.getSystemClassLoader().getResource(resource).getPath();
 			properties.load(new FileInputStream(filePath));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("DB Config 실패 : " + e.toString());
 		}
 		jdbc_driver = properties.getProperty("driver");
 		oracle_url = properties.getProperty("url");
-		connectedId = properties.getProperty("id");
-		connectedPwd = properties.getProperty("pw");
+		id = properties.getProperty("id");
+		pw = properties.getProperty("pw");
 	}
 	
 	protected void connect() {
-		if(jdbc_driver==null && oracle_url==null && connectedId==null && connectedPwd==null)
-			dbConfig();
 		try {
 			Class.forName(jdbc_driver);
-			conn = DriverManager.getConnection(oracle_url, connectedId, connectedPwd);
-		} catch (Exception e) {
-			e.printStackTrace();
+			conn = DriverManager.getConnection(oracle_url, id, pw);
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBC Driver 로드 실패 : " + e.toString());
+		} catch (SQLException e) {
+			System.out.println("Oracle Driver 로드 실패 : " + e.toString());
 		}
 	}
-	
 	protected void disconnect() {
 		try {
 			if(rs!=null) rs.close();
-			if(stmt!=null) stmt.close();
 			if(pstmt!=null) pstmt.close();
+			if(stmt !=null) stmt.close();
 			if(conn!=null) conn.close();
 		} catch (SQLException e) {
-			System.out.println("연결해제 실패 : " + e.toString());
+			System.out.println("Disconnect 실패 : " + e.toString() );
 		}
 	}
 }

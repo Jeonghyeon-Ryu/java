@@ -3,6 +3,7 @@ package com.yedam.app.common;
 import java.util.Scanner;
 
 import com.yedam.app.deal.ReceivingGoodsDAO;
+import com.yedam.app.deal.TakeOutGoodsDAO;
 import com.yedam.app.products.ProductDAO;
 import com.yedam.app.products.ProductInfoManagement;
 
@@ -11,7 +12,7 @@ public class Management {
 	protected Scanner sc = new Scanner(System.in);
 	protected ProductDAO pDAO = ProductDAO.getInstance();
 	protected ReceivingGoodsDAO rDAO = ReceivingGoodsDAO.getInstance();
-	protected TakeOutGoodsDAO tDAO = TakeOutGoods.getInstance();
+	protected TakeOutGoodsDAO tDAO = TakeOutGoodsDAO.getInstance();
 	//생성자
 	public void run() {
 		while(true) {

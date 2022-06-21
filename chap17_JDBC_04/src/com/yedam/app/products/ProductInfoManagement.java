@@ -46,7 +46,7 @@ public class ProductInfoManagement extends Management{
 		// 수정할 정보 입력
 		product = inputUpdateInfo(product);
 		// DB 수정
-		pDAO.update(product);
+		pDAO.updateInfo(product);
 	}
 	private void deleteProductInfo() {
 		// 제품 이름 입력

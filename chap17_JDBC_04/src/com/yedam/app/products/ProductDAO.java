@@ -19,19 +19,19 @@ public class ProductDAO extends DAO {
 	public void insert(Product product) {
 		int result = 0; 
 		try {
-			connect();
 			if(search(product.getProductName())>0) {
 				throw new Exception("동일한 상품이 등록되어 있습니다.");
 			}
+			connect();
 			String sql = "INSERT INTO products(product_id,product_name,product_price) VALUES(products_seq.nextval,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, product.getProductName());
 			pstmt.setInt(2, product.getProductPrice());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("등록이 실패하였습니다 : " + e.toString());
+			System.out.println("(SQL) 등록이 실패하였습니다 : " + e.toString());
 		} catch (Exception e) {
-			System.out.println("등록이 실패하였습니다 : " + e.toString());
+			System.out.println("(동일제품 존재) 등록이 실패하였습니다 : " + e.toString());
 		} finally {
 			disconnect();
 			System.out.println(result + "개의 행이 추가 되었습니다.");
@@ -46,7 +46,7 @@ public class ProductDAO extends DAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, product.getProductStock());
 			pstmt.setInt(2, product.getProductId());
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("수정이 실패하였습니다. : " +e.toString());
 		} finally {
@@ -92,7 +92,7 @@ public class ProductDAO extends DAO {
 		Product product = null;
 		try {
 			connect();
-			String sql = "SELECT * FROM products WHERE product_id = " + productName;
+			String sql = "SELECT * FROM products WHERE product_name = '" + productName + "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
@@ -114,7 +114,7 @@ public class ProductDAO extends DAO {
 		int count = 0;
 		try {
 			connect();
-			String sql = "SELECT count(*) FROM products WHERE product_id = " + productName;
+			String sql = "SELECT count(*) FROM products WHERE product_name = '" + productName + "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {

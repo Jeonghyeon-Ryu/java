@@ -59,7 +59,7 @@ public class ReceivingGoodsDAO extends DAO {
 		int amount = 0;
 		try {
 			connect();
-			String sql = "SELECT SUM(product_amount) AS SUM FROM receiving_goods WHERE product_id = " + productId;
+			String sql = "SELECT NVL(SUM(product_amount),0) AS SUM FROM receiving_goods WHERE product_id = " + productId;
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
@@ -100,7 +100,7 @@ public class ReceivingGoodsDAO extends DAO {
 		List<DealInfo> list = new ArrayList<>();
 		try {
 			connect();
-			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM receiving_goods r JOIN products p ON r.product_id=p.product_id WHERE deal_date = ? ORDER BY 1,2";
+			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM receiving_goods r JOIN products p ON r.product_id=p.product_id WHERE r.deal_date = ? ORDER BY 1,2";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setDate(1, dealDate);
 			rs = pstmt.executeQuery();
@@ -124,7 +124,7 @@ public class ReceivingGoodsDAO extends DAO {
 		List<DealInfo> list = new ArrayList<>();
 		try {
 			connect();
-			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM receiving_goods r JOIN products p ON r.product_id=p.product_id WHERE product_id = ? ORDER BY 1,2";
+			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM receiving_goods r JOIN products p ON r.product_id=p.product_id WHERE r.product_id = ? ORDER BY 1,2";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productId);
 			rs = pstmt.executeQuery();

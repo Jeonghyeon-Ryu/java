@@ -10,7 +10,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "[ 제품번호 : " + productId + ", 제품이름 : " + productName + ", 제품가격 : " + productPrice
-				+ ", 제품재고 : " + productStock + ",현재 재고 가치 : " + (productPrice*productStock)+ " ]";
+				+ ", 제품재고 : " + productStock + ", 현재 재고 가치 : " + (productPrice*productStock)+ " ]";
 	}
 	public int getProductId() {
 		return productId;

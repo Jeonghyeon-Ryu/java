@@ -33,7 +33,8 @@ public class TakeOutGoodsDAO extends DAO {
 			System.out.println(result + "개의 행이 추가되었습니다.");
 		}
 	}
-	// 조회 - 입고 내역 존재 유무 필요
+	
+	/*//조회 - 입고 내역 존재 유무 필요
 	public boolean selectInfo(int productId) {
 		boolean isSelected = false;
 		try {
@@ -47,25 +48,27 @@ public class TakeOutGoodsDAO extends DAO {
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("입고내역 존재 확인 조회가 실패하였습니다. : " + e.toString());
+			System.out.println("출고내역 존재 확인 조회가 실패하였습니다. : " + e.toString());
 		} finally {
 			disconnect();
 		}
 		return isSelected;
 	}
-	// 조회 - 입고 수량
+	*/
+	
+	// 조회 - 출고 수량
 	public int selectAmount(int productId) {
 		int amount = 0;
 		try {
 			connect();
-			String sql = "SELECT SUM(product_amount) AS SUM FROM take_out_goods WHERE product_id = " + productId;
+			String sql = "SELECT NVL(SUM(product_amount),0) AS SUM FROM take_out_goods WHERE product_id = " + productId;
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
 				amount = rs.getInt("SUM");
 			}
 		} catch (SQLException e) {
-			System.out.println("입고수량 확인 조회가 실패하였습니다. : " + e.toString());
+			System.out.println("출고수량 확인 조회가 실패하였습니다. : " + e.toString());
 		} finally {
 			disconnect();
 		}
@@ -76,7 +79,7 @@ public class TakeOutGoodsDAO extends DAO {
 		List<DealInfo> list = new ArrayList<>();
 		try {
 			connect();
-			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM take_out_goods r JOIN products p ON r.product_id=p.product_id ORDER BY 1,2";
+			String sql = "SELECT t.deal_date, t.product_id, p.product_name, t.product_amount FROM take_out_goods t JOIN products p ON t.product_id=p.product_id ORDER BY 1,2";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -88,7 +91,7 @@ public class TakeOutGoodsDAO extends DAO {
 				list.add(info);
 			}
 		} catch (Exception e) {
-			System.out.println("전체 조회가 실패하였습니다 : " + e.toString());
+			System.out.println("출고 전체 조회가 실패하였습니다 : " + e.toString());
 		} finally {
 			disconnect();
 		}
@@ -99,7 +102,7 @@ public class TakeOutGoodsDAO extends DAO {
 		List<DealInfo> list = new ArrayList<>();
 		try {
 			connect();
-			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM take_out_goods r JOIN products p ON r.product_id=p.product_id WHERE deal_date = ? ORDER BY 1,2";
+			String sql = "SELECT t.deal_date, t.product_id, p.product_name, t.product_amount FROM take_out_goods t JOIN products p ON t.product_id=p.product_id WHERE t.deal_date = ? ORDER BY 1,2";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setDate(1, dealDate);
 			rs = pstmt.executeQuery();
@@ -112,7 +115,7 @@ public class TakeOutGoodsDAO extends DAO {
 				list.add(info);
 			}
 		} catch (Exception e) {
-			System.out.println("전체 조회가 실패하였습니다 : " + e.toString());
+			System.out.println("출고 전체 조회가 실패하였습니다 : " + e.toString());
 		} finally {
 			disconnect();
 		}
@@ -123,7 +126,7 @@ public class TakeOutGoodsDAO extends DAO {
 		List<DealInfo> list = new ArrayList<>();
 		try {
 			connect();
-			String sql = "SELECT r.deal_date, r.product_id, p.product_name, r.product_amount FROM take_out_goods r JOIN products p ON r.product_id=p.product_id WHERE product_id = ? ORDER BY 1,2";
+			String sql = "SELECT t.deal_date, t.product_id, p.product_name, t.product_amount FROM take_out_goods t JOIN products p ON t.product_id=p.product_id WHERE t.product_id = ? ORDER BY 1,2";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, productId);
 			rs = pstmt.executeQuery();
@@ -136,7 +139,7 @@ public class TakeOutGoodsDAO extends DAO {
 				list.add(info);
 			}
 		} catch (Exception e) {
-			System.out.println("전체 조회가 실패하였습니다 : " + e.toString());
+			System.out.println("출고 전체 조회가 실패하였습니다 : " + e.toString());
 			} finally {
 				disconnect();
 			}

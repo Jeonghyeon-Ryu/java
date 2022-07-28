@@ -11,5 +11,7 @@ public class q71 {
 			System.out.println("Checking...");
 			return w.equals("do");
 		};
+//		Predicate test2 = (String w)-> w.length()>3;
+//		words.stream().filter(test2).filter(test1).count();
 	}
 }

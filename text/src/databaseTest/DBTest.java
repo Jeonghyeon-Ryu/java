@@ -11,7 +11,7 @@ public class DBTest {
 	public static void main(String[] args) throws SQLException {
 		String driver = "oracle.jdbc.driver.OracleDriver";
 	    String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	    String user = "hr"; String password = "hr";
+	    String user = "manager"; String password = "manager";
 	    Connection con = null;
 	    try { 
 	    	Class.forName(driver);

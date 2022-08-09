@@ -9,8 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.WheelInput;
+
 
 public class CrawlingTest {
 	// 필드
@@ -27,11 +26,12 @@ public class CrawlingTest {
 //		List<String> searchSector = rs.getSectorOne("대구광역시");
 //		List<String> searchStoreDivision = rsd.getStoreDivision();
 		
-		for(int i=1; i<60000; i++) {
+		for(int i=1; i<80000; i++) {
 				 searchUrlList.add("https://www.goodchoice.kr/product/detail?ano="+i);
 		}
 		// 웹 드라이버가 설치된 경로에서 드라이버.exe 파일 실행
 		System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+		System.out.println(WEB_DRIVER_PATH);
 		
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized");
@@ -41,7 +41,7 @@ public class CrawlingTest {
 		
 		
 		// ******************************* 지도 좌표 Open
-		for(int i=0; i<searchUrlList.size(); i++) { // alert_msg box_shadow
+		for(int i=1943; i<searchUrlList.size(); i++) { // alert_msg box_shadow
 			Thread.sleep(1000);
 			driver.get(searchUrlList.get(i));
 			try {

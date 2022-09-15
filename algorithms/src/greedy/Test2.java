@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Test2 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -13,14 +14,17 @@ public class Test2 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int count = Integer.parseInt(br.readLine());
 		
-		char[] cArr =  br.readLine().toCharArray();
-		Arrays.sort(cArr);
-		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int i = count-1;
 		count = 0;
-		for(int i=0; i<cArr.length; i++) {
-			i = i+cArr[i]-48-1 ;
-			System.out.println("i : " + i);
+		System.out.println("i : " + i);
+		while(true) {
+			i = i - (cArr[i]-'0');
 			count++;
+			if(i < 0) {
+				break;
+			}
 		}
 		bw.write(String.valueOf(count));
 		bw.flush();

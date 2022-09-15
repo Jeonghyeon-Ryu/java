@@ -1,0 +1,66 @@
+-- 다중행 서브쿼리 연습문제
+
+1. employees 테이블을 조회하여 직급(job_id) 별로 해당 직급에서 최대 급여를 받는 직원의 이름과 직급, 급여를 출력하세요. 단, 급여 순으로 오름차순 정렬하세요.
+
+select first_name, job_id, salary
+from employees
+where (job_id,salary) IN (select job_id, max(salary) from employees group by job_id)
+order by salary;
+
+-- ▲ 다중행 + 다중열 서브쿼리
+----------------------------------------------------------------------------------------
+
+2. employees 테이블을 조회하여 각 부서별 평균 급여를 구하고 그 중에서 평균급여가 가장 적은 부서의 평균 급여보다 적게받는 직원들의 부서명, 직원명, 급여을 출력하세요. 
+
+select department_id, first_name, salary
+from employees 
+where salary < (select MIN(avg(salary)) from employees group by department_id);
+
+select department_id, first_name, salary
+from employees 
+where salary < ALL (select avg(salary) from employees group by department_id);
+
+-- ▲ 다중행 서브쿼리
+----------------------------------------------------------------------------------------
+
+3. employees 테이블을 조회해서 직원들 중에서 자신의 직급의 평균급여와 같거나 많이 받는 사람들의 이름과 직급, 현재급여를 출력하세요 
+
+select a.first_name, a.job_id, a.salary
+from employees a
+where a.salary >= (select avg(salary) from employees b where a.job_id=b.job_id group by job_id);
+
+-- ▲ 상호연관 서브쿼리
+----------------------------------------------------------------------------------------
+
+-- 인라인뷰, 상호관련 서브쿼리 연습문제
+4. employees 테이블과 departments 테이블을 사용하여 부서별로 사원들의 최대 급여와 가장높은 사번, 부서이름을 출력하세요. 
+
+select a.department_id 부서번호, 최대급여, 가장높은사원번호
+from (select department_id, max(salary) 봉급
+    from employees group by department_id) a,
+    (select department_id, max(employee_id) 가장높은사원번호
+    from employees group by department_id) b
+where a.department_id = b.department_id
+order by 부서번호,사원번호;
+
+-- ▲ 인라인 뷰
+----------------------------------------------------------------------------------------
+
+5. employee 테이블에서 사원의 급여가 동일 부서의 평균 봉급 보다 큰 사원들의 사번과 이름과 급여,
+해당 부서의 평균 급여를 출력
+
+select a.employee_id, a.first_name, a.salary, (select trunc(avg(salary)) from employees b where a.department_id=b.department_id group by department_id) 부서평균급여
+from employees a
+where salary > (select trunc(avg(salary)) from employees b where a.department_id=b.department_id group by department_id);
+
+-- ▲ 스칼라 + 상호연관 서브쿼리
+----------------------------------------------------------------------------------------
+
+6. employees 테이블을 조회하여 아래와 같이 사원들의 급여순위와 사원이름, 급여를 출력하시오. 단 급여순위는 급여가 많은 사람부터 1위~5위까지 출력하세요. 
+
+select ROWNUM, first_name, salary
+from (select ROWNUM, first_name, salary from employees order by salary desc)
+where ROWNUM between 1 and 5;
+
+-- ▲ 인라인 뷰 + ROWNUM
+----------------------------------------------------------------------------------------

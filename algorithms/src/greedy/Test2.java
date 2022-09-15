@@ -18,7 +18,6 @@ public class Test2 {
 
 		int i = count-1;
 		count = 0;
-		System.out.println("i : " + i);
 		while(true) {
 			i = i - (cArr[i]-'0');
 			count++;

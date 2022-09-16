@@ -19,7 +19,7 @@ public class Test2 {
 		int i = count-1;
 		count = 0;
 		while(true) {
-			i = i - (cArr[i]-'0');
+//			i = i - (st.nextToken()-'0');
 			count++;
 			if(i < 0) {
 				break;
